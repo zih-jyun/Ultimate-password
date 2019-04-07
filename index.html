@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>終極密碼</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="contain">
+
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center display-3 text-danger">
+                    <img src="image/下載.png" alt="" width="15%">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h2 class="text-right display-1">
+                    <strong> </strong>
+                </h2>
+            </div>
+            <div class="col">
+                <h2 id="range" class="text-center display-1">
+
+                </h2>
+            </div>
+            <div class="col">
+                <h2 class="text-left display-1" id="max">
+                    <strong id="max"></strong>
+                </h2>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-4 display-3">　</div>
+                <div id="output" class="col-4 mb-3 display-4 text-center"></div>
+                <div class="col-4 display-3">　</div>
+            </div>
+            <div class="row ">
+                <div class="col-4 display-3">
+                    <button type="button" class="btn btn-secondary btn-block ">
+                        <h1>1</h1>
+                    </button> </div>
+                <div class="col-4 display-3">
+                    <button type="button" class="btn btn-secondary btn-block">
+                        <h1>2</h1>
+                    </button>
+                </div>
+                <div class="col-4 display-3">
+                    <button type="button" class="btn btn-secondary btn-block">
+                        <h1>3</h1>
+                    </button>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-4 display-3">
+                    <button type="button" class="btn btn-secondary btn-block ">
+                        <h1>4</h1>
+                    </button> </div>
+                <div class="col-4 display-3">
+                    <button type="button" class="btn btn-secondary btn-block">
+                        <h1>5</h1>
+                    </button>
+                </div>
+                <div class="col-4 display-3">
+                    <button type="button" class="btn btn-secondary btn-block">
+                        <h1>6</h1>
+                    </button>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-4 display-3">
+                    <button type="button" class="btn btn-secondary btn-block ">
+                        <h1>7</h1>
+                    </button> </div>
+                <div class="col-4 display-3">
+                    <button type="button" class="btn btn-secondary btn-block">
+                        <h1>8</h1>
+                    </button>
+                </div>
+                <div class="col-4 display-3">
+                    <button type="button" class="btn btn-secondary btn-block">
+                        <h1>9</h1>
+                    </button>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-4 display-3">
+                    <button type="button" class="btn btn-danger btn-block " id="delete">
+                        <h1>重新</h1>
+                    </button> </div>
+                <div class="col-4 display-3">
+                    <button type="button" class="btn btn-secondary btn-block">
+                        <h1>0</h1>
+                    </button>
+                </div>
+                <div class="col-4 display-3">
+                    <button type="button" class="btn btn-primary btn-block" id="go">
+                        <h1>確認</h1>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+
+        var rnd = Math.random() * 100;
+        var correct = false;
+        var ans = Math.floor(rnd);
+        var min = 0,
+            max = 100;
+        var output = document.getElementById("output");
+        var buttons = document.getElementsByTagName("h1");
+        for (var i = 0; i < 12; i++) {
+            var button = buttons[i];
+            button.onclick = function () {
+                console.log(button);
+                var output = document.getElementById("output");
+                var btn = event.srcElement;
+                if (output.innerText.length < 2) {
+                    output.innerText += btn.innerText;
+                }
+            };
+        }
+        var range = document.getElementById("range");
+        document.getElementById("go").onclick = function () {
+            console.log(ans);
+
+            if (output.innerText == ans) {
+                alert("答對啦!!!!!");
+            }
+            if (output.innerText > ans) {
+                if (output.innerText < max)
+                    max = output.innerText;
+            }
+            else if (output.innerText < ans) {
+                if (output.innerText > min)
+                    min = output.innerText;
+            }
+            range.innerText = min + "~" + max;
+            output.innerText = "";
+        }
+
+        document.getElementById("delete").onclick = function () {
+            if (confirm("結束?")) {
+                range.textContent = "";
+                output.textContent = "";
+                min = 0;
+                max = 100;
+                rnd = Math.random() * 100;
+                ans = Math.floor(rnd);
+            }
+        }
+    </script>
+</body>
+
+</html>
